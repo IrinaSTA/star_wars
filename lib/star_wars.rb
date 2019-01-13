@@ -14,15 +14,12 @@ class Solution
 		  numberOfFilms
     end
 
-    def found?(character, movie_title)
-    	!movie_title.scan(/#{character}/).empty?
-    end
+		private
 
     def get_character_names
     	names = []
     	for uri in get_all_character_uris do
-    		names << get_character_name(get_json(uri))
-        p names
+    		names << get_character_name(json(uri))
     	end
     	names
     end
@@ -41,7 +38,7 @@ class Solution
 
     def get_all_character_apis
     	all_character_apis = []
-    	for movie in get_json(@@movie_api)["results"] do
+    	for movie in json(@@movie_api)["results"] do
     		all_character_apis << movie["characters"]
     	end
     	all_character_apis.flatten
