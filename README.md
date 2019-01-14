@@ -4,7 +4,7 @@ Uses ruby's 'net/http' and 'json' modules to access an API of films and characte
 
 To run, load file in terminal, then type in:
 
-solution = Solution.new
-solution.run("Luke Skywalker")
+```solution = Solution.new```
+```solution.run("Luke Skywalker")```
 
 This will tell you in how many of the seven Star Wars films the character of Luke Skywalker appeared
