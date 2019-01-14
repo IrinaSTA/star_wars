@@ -15,6 +15,6 @@ To run,
 
 This will tell you in how many of the seven Star Wars films the character of Luke Skywalker appeared
 
-One test is included. To run it, in the terminal, type in:
+One test is included. To run it, in the terminal type in:
 
 ```rspec spec/star_wars2_spec.rb```
