@@ -1,11 +1,9 @@
 require 'net/http'
 require 'json'
-require 'pry'
 
 class Solution
-
 	@@movie_api = URI('https://challenges.hackajob.co/swapi/api/films/')
-
+# 174 API calls are taking about 25 sec each time
     def run(character)
     	numberOfFilms = 0
     	for name in get_character_names
@@ -15,37 +13,25 @@ class Solution
     end
 
 		private
-
+# Extracts character names from array of URIs and returns array
     def get_character_names
-    	names = []
-    	for uri in get_all_character_uris do
-    		names << get_character_name(json(uri))
-    	end
-    	names
+			get_all_character_uris.map { |uri| get_character_name(json(uri)) }
     end
 
     def get_character_name(json)
       json["name"]
     end
-
+# Takes array of APIs and converts them to URIs
     def get_all_character_uris
-      all_character_uris = []
-      for api in get_all_character_apis
-        all_character_uris << uri(api)
-      end
-      all_character_uris
+			get_all_character_apis.map { |api| uri(api) }
     end
-
+# Makes an array of all character API links
     def get_all_character_apis
-    	all_character_apis = []
-    	for movie in json(@@movie_api)["results"] do
-    		all_character_apis << movie["characters"]
-    	end
-    	all_character_apis.flatten
+			json(@@movie_api)["results"].map { |movie| movie["characters"]}.flatten
     end
 
-    def json(response)
-		  JSON.parse(get_api(response))
+    def json(uri)
+		  JSON.parse(get_api(uri))
     end
 
     def get_api(uri)
